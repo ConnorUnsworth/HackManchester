@@ -10,23 +10,23 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="345.0" prefWidth="588.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Main">
+<AnchorPane xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Main">
    <children>
-      <Button fx:id="btnBrowseImage" layoutX="502.0" layoutY="265.0" mnemonicParsing="false" text="Browse..." />
-      <TextField fx:id="txtImagePath" layoutX="16.0" layoutY="265.0" prefHeight="25.0" prefWidth="486.0" promptText="Image Path" />
-      <ImageView fx:id="imgLoadedImage" fitHeight="150.0" fitWidth="336.0" layoutX="18.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+      <Button fx:id="btnBrowseImage" layoutX="504.0" layoutY="283.0" mnemonicParsing="false" text="Browse..." />
+      <TextField fx:id="txtImagePath" layoutX="18.0" layoutY="283.0" prefHeight="25.0" prefWidth="486.0" promptText="Image Path" />
+      <ImageView fx:id="imgLoadedImage" fitHeight="150.0" fitWidth="336.0" layoutX="18.0" layoutY="34.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@application/resources/placeholder.jpg" />
          </image></ImageView>
-      <Button fx:id="btnHideMessage" layoutX="168.0" layoutY="303.0" mnemonicParsing="false" text="Hide Message" />
-      <ImageView fx:id="imgHiddenMessage" fitHeight="150.0" fitWidth="336.0" layoutX="302.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+      <Button fx:id="btnHideMessage" layoutX="170.0" layoutY="321.0" mnemonicParsing="false" text="Hide Message" />
+      <ImageView fx:id="imgHiddenMessage" fitHeight="150.0" fitWidth="336.0" layoutX="292.0" layoutY="34.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@application/resources/placeholder.jpg" />
          </image>
       </ImageView>
       <Text fx:id="txtErrMsg" layoutX="18.0" layoutY="177.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Information Message" visible="false" />
-      <Button layoutX="285.0" layoutY="303.0" mnemonicParsing="false" text="Button" />
-      <TabPane layoutX="20.0" layoutY="173.0" prefHeight="76.0" prefWidth="548.0" tabClosingPolicy="UNAVAILABLE">
+      <Button layoutX="287.0" layoutY="321.0" mnemonicParsing="false" text="Button" />
+      <TabPane layoutX="18.0" layoutY="198.0" prefHeight="76.0" prefWidth="548.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
           <Tab text="Message">
             <content>
@@ -49,5 +49,7 @@
           </Tab>
         </tabs>
       </TabPane>
+      <Text layoutX="89.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Original Image" />
+      <Text layoutX="395.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="New Image" />
    </children>
 </AnchorPane>
