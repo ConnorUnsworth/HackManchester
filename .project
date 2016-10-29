@@ -13,5 +13,9 @@
 	</buildSpec>
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
+=======
+	</buildSpec>
+	<natures>
+>>>>>>> Stashed changes
 	</natures>
 </projectDescription>
