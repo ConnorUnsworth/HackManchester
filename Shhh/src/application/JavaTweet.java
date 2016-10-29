@@ -21,16 +21,17 @@ import twitter4j.auth.RequestToken;
 
 public class JavaTweet {
 
-	static String consumerKeyStr = "Z3jX6kt8pC3JiFwdUdKY66gWg";
-	static String consumerSecretStr = "n7yp2HM5sUAUncbhr8AEOdwujzCUywQ2F8c5Ngh7VaeQ0hBUU6";
-	static String accessTokenStr = "391991747-hcvAHlf8f2AtVrqNukfixOwXl7TOsDc26nKqFpZY";
-	static String accessTokenSecretStr = "VUeQtw1ip3iQwo67H1YySMo1uTsqDup6mp7rwKCIKOm6f";
+	static String consumerKeyStr = "WAAlatzCSbBtJj4Kqr8pVzR24";
+	static String consumerSecretStr = "oZsQloivBb9ajwnLDJ1ETq0vrbZ0Jw9qk9V0hnb58bXKAPo1VI";
+	static String accessTokenStr = "391991747-VgDIdKkIEVshEi5jEQ7F2c2GCC9Mgf9ZFYh2ISqn";
+	static String accessTokenSecretStr = "JvUiaV99bbYKJ73WhpUMjTtqDqOVizYugW9cTDvlfFTdu";
 	Twitter twitter;
 	private Preferences twitterAuth;
 
 	public JavaTweet()
 	{
 		twitter = new TwitterFactory().getSingleton();
+		twitterAuth = Preferences.userNodeForPackage(JavaTweet.class);
 	}
 	public void oauth()
 	{
@@ -90,6 +91,8 @@ public class JavaTweet {
 						accessToken = twitter.getOAuthAccessToken();
 					}
 					System.out.println(accessToken);
+					
+
 				} catch (TwitterException te) {
 					if(401 == te.getStatusCode()){
 						System.out.println("Unable to get the access token.");
@@ -120,23 +123,26 @@ public class JavaTweet {
 		{
 
 
-			twitter.setOAuthConsumer(consumerKeyStr, consumerSecretStr);
+			//twitter.setOAuthConsumer(consumerKeyStr, consumerSecretStr);
 			//				 	AccessToken accessToken = new AccessToken(accessTokenStr,
 			//			             accessTokenSecretStr);
 			String accessTokenStr = twitterAuth.get("access_token", null);
 			String accessTokenSecretStr = twitterAuth.get("access_token_secret", null);
 
+			AccessToken accessToken = new AccessToken(accessTokenStr, accessTokenSecretStr); 
+			twitter.setOAuthAccessToken(accessToken);
+			//twitter.updateStatus("#hackmanchester test");
+
 			if(accessTokenStr != null)
 			{
-				AccessToken accessToken = new AccessToken(accessTokenStr, accessTokenSecretStr); 
-				twitter.setOAuthAccessToken(accessToken);
-				//twitter.updateStatus("#hackmanchester test");
+				
 				
 				StatusUpdate statusUpdate = new StatusUpdate("Nothing to see here");
 				statusUpdate.setMedia(imageToSend);
 				twitter.updateStatus(statusUpdate);
-
 				System.out.println("Successfully updated the status in Twitter.");
+
+
 			}
 			else
 			{
