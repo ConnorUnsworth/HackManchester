@@ -46,6 +46,8 @@ private TextArea txtMessageToHide;
 
 @FXML
 private ImageView imgLoadedImage;
+@FXML
+private ImageView imgHiddenMessage;
 
 @FXML
 private Text txtErrMsg;
@@ -125,10 +127,13 @@ CustomBufferedImageStorage storage;
 		
 		try {
 		ioController.saveNewImage(iExpander.expand(storage.getImage()));
-			
+					
 		} catch (IOException e) {
 			
 		}
+		
+		imgHiddenMessage.setImage(ioController.getNewImage());
+
 		
 		txtErrMsg.setVisible(true);
 		txtErrMsg.setText("Message Hidden");

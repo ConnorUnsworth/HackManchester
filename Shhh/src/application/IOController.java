@@ -13,6 +13,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
+import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.VBoxBuilder;
 import javafx.scene.media.AudioClip;
@@ -68,6 +69,24 @@ public class IOController extends Application {
     	} catch (IOException e) {
     	    
     	}
+    }
+    
+    public Image getNewImage()
+    {
+    
+    	
+    	 try{
+    		File resizedFile = new File("c:\\image\\saved.png");
+      	    
+      	 	Image image = new Image(resizedFile.toURI().toString());
+      	 	
+          	return image;
+          }
+          catch(Exception ex)
+          {
+          	return null;
+          	
+          }
     }
     
     
