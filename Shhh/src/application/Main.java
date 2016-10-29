@@ -32,6 +32,10 @@ public class Main extends Application implements Initializable{
 private Button btnBrowseImage;
 @FXML
 private Button btnBrowseSound;
+@FXML
+private Button btnTwitterSignIn;
+@FXML
+private Button btnTweetImage;
 
 @FXML
 private Button btnHideMessage;
@@ -51,9 +55,12 @@ private ImageView imgHiddenMessage;
 
 @FXML
 private Text txtErrMsg;
+
 	
 IOController ioController = new IOController();
 CustomBufferedImageStorage storage;
+JavaTweet tweet = new JavaTweet();
+
 	@Override
 	public void start(Stage primaryStage) {
 		
@@ -91,8 +98,7 @@ CustomBufferedImageStorage storage;
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
 	
-		JavaTweet tweet = new JavaTweet();
-		tweet.oauth();
+	
 		
 		btnBrowseImage.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent e) {
@@ -112,6 +118,21 @@ CustomBufferedImageStorage storage;
 			public void handle(ActionEvent e) {
 				
 				saveEncryptedMessage();
+			}
+		});
+		
+		btnTwitterSignIn.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent e) {
+				
+				
+				tweet.oauth();
+			}
+		});
+		
+		btnTweetImage.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent e) {
+				
+				tweet.tweet(ioController.getConvertedFile());
 			}
 		});
 			

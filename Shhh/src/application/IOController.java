@@ -25,6 +25,8 @@ public class IOController extends Application {
 	
 	private Stage stage;
 	
+	private File outputfile;
+	
 	
 	public static void main(String[] args) {
         launch(args);
@@ -57,6 +59,11 @@ public class IOController extends Application {
          
     }
     
+    public File getConvertedFile()
+    {
+    	return outputfile;
+    }
+    
     
     
     
@@ -64,7 +71,7 @@ public class IOController extends Application {
     {
     	try {
     	    // retrieve image
-    	    File outputfile = new File("c:\\image\\saved.png");
+    	     outputfile = new File("c:\\image\\saved.png");
     	    ImageIO.write(image, "png", outputfile);
     	} catch (IOException e) {
     	    

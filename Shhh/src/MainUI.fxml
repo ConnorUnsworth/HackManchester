@@ -51,5 +51,7 @@
       </TabPane>
       <Text layoutX="89.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Original Image" />
       <Text layoutX="395.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="New Image" />
+      <Button fx:id="btnTwitterSignIn" layoutX="18.0" layoutY="320.0" mnemonicParsing="false" text="Twitter Integrate" />
+      <Button fx:id="btnTweetImage" layoutX="400.0" layoutY="320.0" mnemonicParsing="false" text="Send Image to twitter" />
    </children>
 </AnchorPane>
