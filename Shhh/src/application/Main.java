@@ -55,7 +55,7 @@ CustomBufferedImageStorage storage;
 	@Override
 	public void start(Stage primaryStage) {
 		
-	
+
 		
 		try {
 			FXMLLoader loader = new FXMLLoader();
@@ -89,6 +89,8 @@ CustomBufferedImageStorage storage;
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
 	
+		JavaTweet tweet = new JavaTweet();
+		tweet.oauth();
 		
 		btnBrowseImage.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent e) {
