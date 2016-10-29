@@ -2,6 +2,7 @@ package application;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javafx.application.Application;
@@ -55,6 +56,23 @@ public class IOController extends Application {
          
     }
     
+    
+    
+    
+    public void saveNewImage(BufferedImage image)
+    {
+    	try {
+    	    // retrieve image
+    	    File outputfile = new File("c:\\image\\saved.png");
+    	    ImageIO.write(image, "png", outputfile);
+    	} catch (IOException e) {
+    	    
+    	}
+    }
+    
+    
+    
+    
     public CustomSoundStorage getSound()
     {
    	 FileChooser fileChooser = new FileChooser();
@@ -74,6 +92,8 @@ public class IOController extends Application {
         }
         
    }
+    
+    
     
     
 }

@@ -4,7 +4,6 @@ import java.awt.image.BufferedImage;
 import java.awt.image.WritableRaster;
 import java.io.IOException;
 
-
 public class ImageExpander {
 	public BufferedImage expand(BufferedImage bufimg) throws IOException{
 		WritableRaster raster = bufimg.getRaster();
@@ -57,8 +56,6 @@ public class ImageExpander {
 
 			}
 		}
-
-
 		return newBufimg;
 	}
 
@@ -73,8 +70,6 @@ public class ImageExpander {
 	}
 	
 	private int[] adjust(int[] pixel, Byte data){
-		
-		
 		return pixel;
 	}
 }

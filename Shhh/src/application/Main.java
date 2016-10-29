@@ -1,9 +1,11 @@
 package application;
 	
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import image.ImageExpander;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -49,7 +51,7 @@ private ImageView imgLoadedImage;
 private Text txtErrMsg;
 	
 IOController ioController = new IOController();
-
+CustomBufferedImageStorage storage;
 	@Override
 	public void start(Stage primaryStage) {
 		
@@ -119,6 +121,15 @@ IOController ioController = new IOController();
 		System.out.println("ENCRYPT MESSAGE");
 		//ANTON AND ALEX
 		
+		ImageExpander iExpander = new ImageExpander();
+		
+		try {
+		ioController.saveNewImage(iExpander.expand(storage.getImage()));
+			
+		} catch (IOException e) {
+			
+		}
+		
 		txtErrMsg.setVisible(true);
 		txtErrMsg.setText("Message Hidden");
 		
@@ -126,7 +137,7 @@ IOController ioController = new IOController();
 
 
 	protected void importImage() {
-	 	CustomBufferedImageStorage storage = ioController.getBufferedImage();
+	 	storage = ioController.getBufferedImage();
 	 	txtImagePath.setText(storage.getFilePath());
 	 	File file =new File(storage.getFilePath());
 	 	Image image = new Image(file.toURI().toString());
