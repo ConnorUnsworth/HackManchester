@@ -64,6 +64,7 @@ public class ImageDataEncoder {
 		WritableRaster encodedRaster = encodedBufimg.getRaster();
 		
 		String binaryStr = "";
+		String nullStr = new Byte[32];
 		
 		for(int x = 0; x < keyRaster.getWidth(); x+=2){
 			for(int y = 0; y < keyRaster.getHeight(); y+=2){
@@ -85,6 +86,13 @@ public class ImageDataEncoder {
 					encodedArr = new int[4];
 					encodedRaster.getPixel(x+1, y+1, encodedArr);
 					binaryStr += compare(keyArr, encodedArr);
+					
+					if(word.length() > 256) {
+						if(((String)(word.substring(word.length() - 256))).equals(nullStr)){
+							x = keyRaster.getWidth();
+							y= keyRaster.getHeight();
+						}
+					}
 				
 			}
 		}
