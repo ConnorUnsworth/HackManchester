@@ -64,7 +64,13 @@ public class ImageDataEncoder {
 		WritableRaster encodedRaster = encodedBufimg.getRaster();
 		
 		String binaryStr = "";
-		String nullStr = new Byte[32];
+		String nullStr = "";
+		
+		for(int i = 0; i < 128; i++)
+		{
+			nullStr += "0";
+		}
+		
 		
 		for(int x = 0; x < keyRaster.getWidth(); x+=2){
 			for(int y = 0; y < keyRaster.getHeight(); y+=2){
@@ -87,8 +93,11 @@ public class ImageDataEncoder {
 					encodedRaster.getPixel(x+1, y+1, encodedArr);
 					binaryStr += compare(keyArr, encodedArr);
 					
-					if(word.length() > 256) {
-						if(((String)(word.substring(word.length() - 256))).equals(nullStr)){
+					if(binaryStr.length() > 128) {
+						System.out.println(binaryStr.substring(binaryStr.length() - 128) + "hello");
+						
+						
+						if(((String)(binaryStr.substring(binaryStr.length() - 128))).equals(nullStr)){
 							x = keyRaster.getWidth();
 							y= keyRaster.getHeight();
 						}
@@ -103,10 +112,23 @@ public class ImageDataEncoder {
 		int counter = 0;
 		
 		for(String str : binStrArr){
+			
+			
 			String newstr = new StringBuffer(str).reverse().toString();
-			//System.out.println(newstr);
+			System.out.println(newstr);
+			//if(newstr.length() == 8)
+			//{
+			
+			if(newstr.startsWith("1")){
+				newstr = "-" + newstr.substring(1);
+			}
 			Byte b = Byte.parseByte(newstr, 2);
 			array[counter] = b;
+			
+			System.out.println(b);
+			System.out.println(newstr);
+			
+			//}
 			counter++;
 		}
 		

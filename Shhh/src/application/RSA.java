@@ -65,7 +65,6 @@ public class RSA {
 		{
 			output.close();
 		}
-
 	}
 
 	PublicKey pubfromFile(String fileName) throws IOException

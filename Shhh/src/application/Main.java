@@ -4,10 +4,15 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.nio.charset.Charset;
+import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 import java.util.ResourceBundle;
 
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
 import javax.imageio.ImageIO;
 
 import image.ImageDataEncoder;
@@ -204,9 +209,26 @@ public class Main extends Application implements Initializable{
 			msgArr[i++] = b;
 		}
 		
-		String s = new String(msgArr);
+	//String s = new String(msgArr);
+//		
+//		txtMessageToHide.setText(s);
 		
-		txtMessageToHide.setText(s);
+		
+		//String s = new String("Plz Convert me lol");
+		
+		
+		RSA rsa = new RSA();
+		
+		
+		try {
+			String string = new String(rsa.decrypt(msgArr), Charset.forName("UTF-8"));
+			txtMessageToHide.setText(string);
+			
+		} catch (InvalidKeyException | NoSuchAlgorithmException | NoSuchPaddingException | IllegalBlockSizeException
+				| BadPaddingException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 
@@ -231,13 +253,37 @@ public class Main extends Application implements Initializable{
 
 		ImageExpander iExpander = new ImageExpander();
 		ImageDataEncoder idEncoder = new ImageDataEncoder();
+		
+		
+		RSA  rsa = new RSA();
+		
 		byte[] messageArr = txtMessageToHide.getText().getBytes();
-		Byte[] messageArrObjs = new Byte[messageArr.length];
+		
+	////ENCRYPTION////
+		byte[] finalMsgArray = null;
+		try {
+			finalMsgArray = rsa.encrypt(messageArr);
+			} catch (InvalidKeyException | NoSuchAlgorithmException | NoSuchPaddingException | IllegalBlockSizeException
+					| BadPaddingException | IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		
+/////////////////
+		
+		
+		Byte[] messageArrObjs = new Byte[finalMsgArray.length];
 		int i = 0;
-		for(byte b : messageArr)
+		for(byte b : finalMsgArray)
 		{
 			messageArrObjs[i++] = b;
 		}
+		
+		
+		
+		
+		
+		
 		
 		ioController.tempSaveNewImage(idEncoder.encode(iExpander.expand(storage.getImage()), messageArrObjs));
 
