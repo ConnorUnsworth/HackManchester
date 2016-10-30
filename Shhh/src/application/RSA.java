@@ -1,3 +1,5 @@
+package application;
+
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -117,7 +119,7 @@ public class RSA {
 
 	public byte[] encrypt(byte[] data) throws IOException, NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, IllegalBlockSizeException, BadPaddingException
 	{
-		PublicKey pubKey = pubfromFile("C:\\Users\\Alexander Savill\\workspace\\RSATest\\public.key");
+		PublicKey pubKey = pubfromFile("public.key");
 		Cipher cipher = Cipher.getInstance("RSA");
 		cipher.init(Cipher.ENCRYPT_MODE, pubKey);
 		byte[] cipherData = cipher.doFinal(data);
@@ -128,7 +130,7 @@ public class RSA {
 
 	public byte[] decrypt(byte[] data) throws IOException, NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, IllegalBlockSizeException, BadPaddingException
 	{
-		PrivateKey privKey = privFromFile("C:\\Users\\Alexander Savill\\workspace\\RSATest\\private.key");
+		PrivateKey privKey = privFromFile("private.key");
 
 		Cipher cipher = Cipher.getInstance("RSA");
 		cipher.init(Cipher.DECRYPT_MODE, privKey);

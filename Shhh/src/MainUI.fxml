@@ -25,7 +25,7 @@
          </image>
       </ImageView>
       <Text fx:id="txtErrMsg" layoutX="9.0" layoutY="216.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Information Message" visible="false" />
-      <Button disable="true" layoutX="409.0" layoutY="211.0" mnemonicParsing="false" text="Decode Message" />
+      <Button fx:id="btnDecodeImage" disable="true" layoutX="409.0" layoutY="211.0" mnemonicParsing="false" text="Decode Message" />
       <TabPane layoutX="330.0" layoutY="72.0" prefHeight="76.0" prefWidth="222.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
           <Tab text="Message">
@@ -52,7 +52,7 @@
       </TabPane>
       <Text layoutX="154.0" layoutY="69.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Original Image" />
       <Text layoutX="647.0" layoutY="69.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Encrypted Image" />
-      <Button layoutX="28.0" layoutY="14.0" mnemonicParsing="false" text="Generate Keys" />
+      <Button fx:id="btnGenerateKeys" layoutX="28.0" layoutY="14.0" mnemonicParsing="false" text="Generate Keys" />
       <Button fx:id="btnSaveImage" layoutX="826.0" layoutY="73.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="89.0" text="Save Image..." />
       <Button fx:id="btnTweetImage" disable="true" layoutX="790.0" layoutY="228.0" mnemonicParsing="false" text="Send Image to twitter" />
    </children>

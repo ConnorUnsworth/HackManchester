@@ -4,10 +4,13 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
 import java.util.ResourceBundle;
 
 import javax.imageio.ImageIO;
 
+import image.ImageDataEncoder;
 import image.ImageExpander;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -41,9 +44,13 @@ public class Main extends Application implements Initializable{
 	private Button btnTweetImage;
 	@FXML
 	private Button btnSaveImage;
-
 	@FXML
 	private Button btnHideMessage;
+	@FXML
+	private Button btnGenerateKeys;
+	@FXML
+	private Button btnDecodeImage;
+
 
 	@FXML
 	private TextField txtImagePath;
@@ -153,8 +160,69 @@ public class Main extends Application implements Initializable{
 				tweet.tweet(ioController.getConvertedFile());
 			}
 		});
+		
+		btnGenerateKeys.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent e) {
+
+				generateKeys();
+			}
+		});
+		
+		btnDecodeImage.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent e) {
+
+				//DECODE IMAGE
+				
+				decodeImg();
+			}
+		});
 
 	}
+
+	protected void decodeImg() {
+		// TODO Auto-generated method stub
+		
+		BufferedImage imageToDecode = storage.getImage();
+		
+		ImageExpander imgExpander = new ImageExpander();
+		ImageDataEncoder imgDataEncoder = new ImageDataEncoder();
+		
+		Byte[] byteArr = imgDataEncoder.decodeImage(
+				imgExpander.expand(
+						imgExpander.recoverKeyImage(
+								imageToDecode)), imageToDecode
+				);
+		
+	
+		
+		
+		//Byte[] messageArr = txtMessageToHide.getText().getBytes();
+		byte[] msgArr = new byte[byteArr.length];
+		int i = 0;
+		for(Byte b : byteArr)
+		{
+			msgArr[i++] = b;
+		}
+		
+		String s = new String(msgArr);
+		
+		txtMessageToHide.setText(s);
+		
+	}
+
+
+	protected void generateKeys() {
+		// TODO Auto-generated method stub
+		RSA rsa = new RSA();
+		try {
+			rsa.generateNewKeys();
+		} catch (NoSuchAlgorithmException | InvalidKeySpecException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+
 
 	protected void saveEncryptedMessage() {
 
@@ -163,14 +231,15 @@ public class Main extends Application implements Initializable{
 
 		ImageExpander iExpander = new ImageExpander();
 		ImageDataEncoder idEncoder = new ImageDataEncoder();
-		Byte[] messageArr = txtMessageToHide.getText().getBytes();
-		
-		try {
-			ioController.tempSaveNewImage(idEncoder.encode(iExpander.expand(storage.getImage()), messageArr));
-			
-		} catch (IOException e) {
-
+		byte[] messageArr = txtMessageToHide.getText().getBytes();
+		Byte[] messageArrObjs = new Byte[messageArr.length];
+		int i = 0;
+		for(byte b : messageArr)
+		{
+			messageArrObjs[i++] = b;
 		}
+		
+		ioController.tempSaveNewImage(idEncoder.encode(iExpander.expand(storage.getImage()), messageArrObjs));
 
 		imgHiddenMessage.setImage(ioController.getNewImage());
 
@@ -191,6 +260,7 @@ public class Main extends Application implements Initializable{
 		imgLoadedImage.setImage(image);
 		
 		btnHideMessage.setDisable(false);
+		btnDecodeImage.setDisable(false);
 
 	}
 

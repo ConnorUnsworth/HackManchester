@@ -113,11 +113,11 @@ public class ImageDataEncoder {
 		for(int i = 0; i < 3; i++){
 			
 			if(keyArr[i] != encodedArr[i]){
-				//System.out.println("1: " + keyArr[i] + " - " + encodedArr[i]);			
+				System.out.println("1: " + keyArr[i] + " - " + encodedArr[i]);			
 				str += "1";
 				
 			}else{
-				//System.out.println("0: " + keyArr[i] + " - " + encodedArr[i]);
+				System.out.println("0: " + keyArr[i] + " - " + encodedArr[i]);
 				str += "0";
 			}
 			
