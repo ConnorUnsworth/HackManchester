@@ -52,8 +52,6 @@ public class Main extends Application implements Initializable{
 	@FXML
 	private Button btnHideMessage;
 	@FXML
-	private Button btnGenerateKeys;
-	@FXML
 	private Button btnDecodeImage;
 
 
@@ -166,12 +164,6 @@ public class Main extends Application implements Initializable{
 			}
 		});
 		
-		btnGenerateKeys.setOnAction(new EventHandler<ActionEvent>() {
-			public void handle(ActionEvent e) {
-
-				//generateKeys();
-			}
-		});
 		
 		btnDecodeImage.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent e) {
