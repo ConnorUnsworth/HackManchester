@@ -124,10 +124,6 @@ public class ImageDataEncoder {
 			}
 			Byte b = Byte.parseByte(newstr, 2);
 			array[counter] = b;
-			
-			System.out.println(b);
-			System.out.println(newstr);
-			
 			//}
 			counter++;
 		}

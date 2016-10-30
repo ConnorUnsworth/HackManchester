@@ -89,7 +89,7 @@ public class Main extends Application implements Initializable{
 			loader.setLocation(Main.class.getResource("/MainUI.fxml"));
 			AnchorPane root = (AnchorPane) loader.load();
 
-			Scene scene = new Scene(root, 600, 350);
+			Scene scene = new Scene(root, 900, 400);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setTitle("Shhh");
 			primaryStage.setScene(scene);
@@ -169,7 +169,7 @@ public class Main extends Application implements Initializable{
 		btnGenerateKeys.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent e) {
 
-				generateKeys();
+				//generateKeys();
 			}
 		});
 		
@@ -217,33 +217,37 @@ public class Main extends Application implements Initializable{
 		//String s = new String("Plz Convert me lol");
 		
 		
-		RSA rsa = new RSA();
+//		RSA rsa = new RSA();
 		
+//		String s = new String(msgArr);
+//		System.out.println(s);
 		
-		try {
-			String string = new String(rsa.decrypt(msgArr), Charset.forName("UTF-8"));
-			txtMessageToHide.setText(string);
+		//try {
+			//String string = new String(rsa.decrypt(msgArr), Charset.forName("UTF-8"));
 			
-		} catch (InvalidKeyException | NoSuchAlgorithmException | NoSuchPaddingException | IllegalBlockSizeException
-				| BadPaddingException | IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+			
+			txtMessageToHide.setText(new String(msgArr));
+			
+//		} catch (NoSuchAlgorithmException | NoSuchPaddingException | IllegalBlockSizeException
+//				| BadPaddingException | IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 		
 	}
 
 
-	protected void generateKeys() {
-		// TODO Auto-generated method stub
-		RSA rsa = new RSA();
-		try {
-			rsa.generateNewKeys();
-		} catch (NoSuchAlgorithmException | InvalidKeySpecException | IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-	}
+//	protected void generateKeys() {
+//		// TODO Auto-generated method stub
+////		RSA rsa = new RSA();
+//		try {
+//			rsa.generateNewKeys();
+//		} catch (NoSuchAlgorithmException | InvalidKeySpecException | IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		
+//	}
 
 
 	protected void saveEncryptedMessage() {
@@ -255,26 +259,26 @@ public class Main extends Application implements Initializable{
 		ImageDataEncoder idEncoder = new ImageDataEncoder();
 		
 		
-		RSA  rsa = new RSA();
+//		RSA  rsa = new RSA();
 		
 		byte[] messageArr = txtMessageToHide.getText().getBytes();
 		
 	////ENCRYPTION////
-		byte[] finalMsgArray = null;
-		try {
-			finalMsgArray = rsa.encrypt(messageArr);
-			} catch (InvalidKeyException | NoSuchAlgorithmException | NoSuchPaddingException | IllegalBlockSizeException
-					| BadPaddingException | IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+//		byte[] finalMsgArray = null;
+//		try {
+//			finalMsgArray = rsa.encrypt(messageArr);
+//			} catch (InvalidKeyException | NoSuchAlgorithmException | NoSuchPaddingException | IllegalBlockSizeException
+//					| BadPaddingException | IOException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
 		
 /////////////////
 		
 		
-		Byte[] messageArrObjs = new Byte[finalMsgArray.length];
+		Byte[] messageArrObjs = new Byte[messageArr.length];
 		int i = 0;
-		for(byte b : finalMsgArray)
+		for(byte b : messageArr)
 		{
 			messageArrObjs[i++] = b;
 		}
