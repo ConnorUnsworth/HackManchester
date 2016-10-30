@@ -2,14 +2,12 @@ package image;
 
 import java.awt.image.BufferedImage;
 import java.awt.image.WritableRaster;
-import java.io.IOException;
+
 
 public class ImageExpander {
-	public BufferedImage expand(BufferedImage bufimg) throws IOException{
+	public BufferedImage expand(BufferedImage bufimg){
 		WritableRaster raster = bufimg.getRaster();
 		
-		int bitOffset = 0;
-
 		BufferedImage newBufimg = new BufferedImage(
 				bufimg.getWidth() * 2, 
 				bufimg.getHeight() * 2,
@@ -41,10 +39,10 @@ public class ImageExpander {
 				}else{
 					raster.getPixel(x, y, downRightPixel);
 				}
-				System.out.println(inputPixel[0]
-						+ ", " + inputPixel[1]
-								+ ", " + inputPixel[2]
-										+ ", " + inputPixel[3]);
+//				System.out.println(inputPixel[0]
+//						+ ", " + inputPixel[1]
+//								+ ", " + inputPixel[2]
+//										+ ", " + inputPixel[3]);
 
 				newRaster.setPixel(2*x, 2*y, inputPixel);
 				newRaster.setPixel(2*x+1, 2*y, 
@@ -56,6 +54,8 @@ public class ImageExpander {
 
 			}
 		}
+
+
 		return newBufimg;
 	}
 
@@ -69,7 +69,24 @@ public class ImageExpander {
 		return interpolated;
 	}
 	
-	private int[] adjust(int[] pixel, Byte data){
-		return pixel;
+	public BufferedImage recoverKeyImage(BufferedImage bufimg){
+		WritableRaster raster = bufimg.getRaster();
+		
+		BufferedImage newBufimg = new BufferedImage(
+				bufimg.getWidth() / 2, 
+				bufimg.getHeight() / 2,
+				java.awt.image.BufferedImage.TYPE_INT_RGB);
+		WritableRaster newRaster = newBufimg.getRaster();
+		
+		for(int x = 0; x < bufimg.getWidth(); x+=2){
+			for(int y = 0; y < bufimg.getHeight(); y+=2){
+				int[] inputPixel = new int[4];
+				raster.getPixel(x, y, inputPixel);
+				newRaster.setPixel(x/2, y/2, inputPixel);
+			}
+		}
+		
+		return newBufimg;
 	}
+	
 }
