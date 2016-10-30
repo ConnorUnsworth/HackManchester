@@ -14,7 +14,7 @@ public class ImageExpander {
 				java.awt.image.BufferedImage.TYPE_INT_RGB);
 		WritableRaster newRaster = newBufimg.getRaster();
 		
-		System.out.println(bufimg.getWidth() + " " + bufimg.getHeight());
+		//System.out.println(bufimg.getWidth() + " " + bufimg.getHeight());
 
 		for(int x = 0; x < bufimg.getWidth(); x++){
 			for(int y = 0; y < bufimg.getHeight(); y++){

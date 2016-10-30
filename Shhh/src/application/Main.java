@@ -162,9 +162,11 @@ public class Main extends Application implements Initializable{
 		//ANTON AND ALEX
 
 		ImageExpander iExpander = new ImageExpander();
+		ImageDataEncoder idEncoder = new ImageDataEncoder();
+		Byte[] messageArr = txtMessageToHide.getText().getBytes();
 		
 		try {
-			ioController.tempSaveNewImage(iExpander.expand(storage.getImage()));
+			ioController.tempSaveNewImage(idEncoder.encode(iExpander.expand(storage.getImage()), messageArr));
 			
 		} catch (IOException e) {
 

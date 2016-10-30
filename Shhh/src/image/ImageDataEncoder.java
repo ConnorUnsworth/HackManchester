@@ -89,14 +89,14 @@ public class ImageDataEncoder {
 			}
 		}
 		
-		System.out.println(binaryStr);
+		//System.out.println(binaryStr);
 		String[] binStrArr = binaryStr.split("(?<=\\G........)");
 		Byte[] array = new Byte[binStrArr.length];
 		int counter = 0;
 		
 		for(String str : binStrArr){
 			String newstr = new StringBuffer(str).reverse().toString();
-			System.out.println(newstr);
+			//System.out.println(newstr);
 			Byte b = Byte.parseByte(newstr, 2);
 			array[counter] = b;
 			counter++;
@@ -113,11 +113,11 @@ public class ImageDataEncoder {
 		for(int i = 0; i < 3; i++){
 			
 			if(keyArr[i] != encodedArr[i]){
-				System.out.println("1: " + keyArr[i] + " - " + encodedArr[i]);			
+				//System.out.println("1: " + keyArr[i] + " - " + encodedArr[i]);			
 				str += "1";
 				
 			}else{
-				System.out.println("0: " + keyArr[i] + " - " + encodedArr[i]);
+				//System.out.println("0: " + keyArr[i] + " - " + encodedArr[i]);
 				str += "0";
 			}
 			
@@ -128,12 +128,12 @@ public class ImageDataEncoder {
 	
 	public void outputImageData(BufferedImage bufimg){
 		WritableRaster raster = bufimg.getRaster();
-		System.out.println("~~~########################################~~~");
+		//System.out.println("~~~########################################~~~");
 		for(int x = 0; x < bufimg.getWidth(); x++){
 			for(int y = 0; y < bufimg.getHeight(); y++){
 				int[] arr = new int[4];
 				raster.getPixel(x, y, arr);
-				System.out.println(arr[0] + ", " + arr[1] + ", " + arr[2] + ", " + arr[3]);
+				//System.out.println(arr[0] + ", " + arr[1] + ", " + arr[2] + ", " + arr[3]);
 			}
 		}
 	}
