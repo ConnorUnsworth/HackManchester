@@ -184,7 +184,7 @@ public class Main extends Application implements Initializable{
 		ImageExpander imgExpander = new ImageExpander();
 		ImageDataEncoder imgDataEncoder = new ImageDataEncoder();
 		
-		Byte[] byteArr = imgDataEncoder.decodeImage(
+		byte[] byteArr = imgDataEncoder.decodeImage(
 				imgExpander.expand(
 						imgExpander.recoverKeyImage(
 								imageToDecode)), imageToDecode

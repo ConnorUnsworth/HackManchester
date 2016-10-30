@@ -68,9 +68,9 @@ public class ImgTestApp extends Application{
 		//dataenc.outputImageData(bi4);
 		
 		
-		Byte[] dataOutput = dataenc.decodeImage(bi4, bi2);
+		//Byte[] dataOutput = dataenc.decodeImage(bi4, bi2);
 		
-		System.out.println(dataOutput[0].toString() + ", "+ dataOutput[1].toString() + ", "+ dataOutput[2].toString() + ", "+ dataOutput[3].toString() + ", "+ dataOutput[4].toString());
+		//System.out.println(dataOutput[0].toString() + ", "+ dataOutput[1].toString() + ", "+ dataOutput[2].toString() + ", "+ dataOutput[3].toString() + ", "+ dataOutput[4].toString());
 		
 		
 

@@ -2,7 +2,6 @@ package image;
 
 import java.awt.image.BufferedImage;
 import java.awt.image.WritableRaster;
-import java.util.ArrayList;
 
 public class ImageDataEncoder {
 	
@@ -59,98 +58,109 @@ public class ImageDataEncoder {
 		return pixel;
 	}
 	
-	public Byte[] decodeImage(BufferedImage keyBufimg, BufferedImage encodedBufimg){
+	public byte[] decodeImage(BufferedImage keyBufimg, BufferedImage encodedBufimg){
 		WritableRaster keyRaster = keyBufimg.getRaster();
 		WritableRaster encodedRaster = encodedBufimg.getRaster();
 		
-		String binaryStr = "";
-		String nullStr = "";
 		
-		for(int i = 0; i < 128; i++)
-		{
-			nullStr += "0";
-		}
+		int offset = 0;
+		byte[] bytearr = new byte[1024];
 		
 		
 		for(int x = 0; x < keyRaster.getWidth(); x+=2){
 			for(int y = 0; y < keyRaster.getHeight(); y+=2){
 				
+				
 					int[] keyArr = new int[4];
 					keyRaster.getPixel(x+1, y, keyArr);
 					int[] encodedArr = new int[4];
 					encodedRaster.getPixel(x+1, y, encodedArr);
-					binaryStr += compare(keyArr, encodedArr);
+					bytearr = compare(keyArr, encodedArr, bytearr, offset);
+					offset += 3;
 					
 					keyArr = new int[4];
 					keyRaster.getPixel(x, y+1, keyArr);
 					encodedArr = new int[4];
 					encodedRaster.getPixel(x, y+1, encodedArr);
-					binaryStr += compare(keyArr, encodedArr);
+					bytearr = compare(keyArr, encodedArr, bytearr, offset);
+					offset += 3;
 					
 					keyArr = new int[4];
 					keyRaster.getPixel(x+1, y+1, keyArr);
 					encodedArr = new int[4];
 					encodedRaster.getPixel(x+1, y+1, encodedArr);
-					binaryStr += compare(keyArr, encodedArr);
-					
-					if(binaryStr.length() > 128) {
-						System.out.println(binaryStr.substring(binaryStr.length() - 128) + "hello");
-						
-						
-						if(((String)(binaryStr.substring(binaryStr.length() - 128))).equals(nullStr)){
-							x = keyRaster.getWidth();
-							y= keyRaster.getHeight();
-						}
-					}
+					bytearr = compare(keyArr, encodedArr, bytearr, offset);
+					offset += 3;
 				
 			}
 		}
 		
-		//System.out.println(binaryStr);
-		String[] binStrArr = binaryStr.split("(?<=\\G........)");
-		Byte[] array = new Byte[binStrArr.length];
-		int counter = 0;
 		
-		for(String str : binStrArr){
-			
-			
-			String newstr = new StringBuffer(str).reverse().toString();
-			System.out.println(newstr);
-			//if(newstr.length() == 8)
-			//{
-			
-			if(newstr.startsWith("1")){
-				newstr = "-" + newstr.substring(1);
-			}
-			Byte b = Byte.parseByte(newstr, 2);
-			array[counter] = b;
-			//}
-			counter++;
-		}
+		
+		
+		//System.out.println(binaryStr);
+//		String[] binStrArr = binaryStr.split("(?<=\\G........)");
+//		Byte[] array = new Byte[binStrArr.length];
+//		int counter = 0;
+//		
+//		for(String str : binStrArr){
+//			
+//			
+//			String newstr = new StringBuffer(str).reverse().toString();
+//			System.out.println(newstr);
+//			//if(newstr.length() == 8)
+//			//{
+//			
+//			if(newstr.startsWith("1")){
+//				newstr = "-" + newstr.substring(1);
+//			}
+//			Byte b = Byte.parseByte(newstr, 2);
+//			array[counter] = b;
+//			//}
+//			counter++;
+//		}
 		
 		//process string
 		
 		
-		return array;	
+		
+		
+		return bytearr;	
 	}
 	
-	private String compare(int[] keyArr, int[] encodedArr){
-		String str = "";
+	private byte[] compare(int[] keyArr, int[] encodedArr, byte[] bytearr, int offset) {
 		for(int i = 0; i < 3; i++){
-			
+			System.out.println(offset);
 			if(keyArr[i] != encodedArr[i]){
-				System.out.println("1: " + keyArr[i] + " - " + encodedArr[i]);			
-				str += "1";
 				
-			}else{
-				System.out.println("0: " + keyArr[i] + " - " + encodedArr[i]);
-				str += "0";
+				bytearr[offset/8] = (byte) (bytearr[offset/8] | (1 << (offset % 8)));
 			}
-			
+			offset++;
 		}
 		
-		return str;
+		
+		
+		return bytearr;
+		
 	}
+	
+//	private String compare(int[] keyArr, int[] encodedArr){
+//		String str = "";
+//		for(int i = 0; i < 3; i++){
+//			
+//			if(keyArr[i] != encodedArr[i]){
+//				System.out.println("1: " + keyArr[i] + " - " + encodedArr[i]);			
+//				str += "1";
+//				
+//			}else{
+//				System.out.println("0: " + keyArr[i] + " - " + encodedArr[i]);
+//				str += "0";
+//			}
+//			
+//		}
+//		
+//		return str;
+//	}
 	
 	public void outputImageData(BufferedImage bufimg){
 		WritableRaster raster = bufimg.getRaster();
